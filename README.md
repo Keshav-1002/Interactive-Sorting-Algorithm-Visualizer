@@ -10,6 +10,8 @@ Diverse Algorithms: Explore and compare common sorting methods:
     Merge Sort
     Count Sort
 
+Algorithm Insights: Displays the time complexity of the selected sorting algorithm, offering deeper understanding into its efficiency.
+
 Real-time Visualization: See elements being compared and swapped dynamically. Bars representing data change color to highlight current operations, making complex steps easy to follow.
 
 Adjustable Playback Speed: Control the animation pace, allowing you to slow down complex parts for detailed understanding or speed through familiar sections.
