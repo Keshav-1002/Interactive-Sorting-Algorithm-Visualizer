@@ -168,6 +168,9 @@ visualization_frame.pack(side="left", fill="both", expand=True, anchor="s")
 algo_display_label = Label(visualization_frame, text="", font=("Arial", 12), bg="white")
 algo_display_label.pack(pady=5)
 
+complexity_display_label = Label(visualization_frame, text="", font=("Arial", 10), bg="white")
+complexity_display_label.pack(pady=(0, 5))
+
 canvas_frame = Frame(visualization_frame, bg="white")
 canvas_frame.pack(pady= (10, 0))
 
@@ -233,6 +236,20 @@ algo_select = ttk.Combobox(controls_frame, values=["Bubble Sort", "Selection Sor
                             "Merge Sort", "Count Sort"], state="readonly")
 algo_select.pack(fill="x", pady=(5,25))
 algo_select.current(0)
+
+def update_time_complexity(event):
+    selected_algo = algo_select.get()
+    time_complexities = {
+        "Bubble Sort": "Time Complexity: O(n^2)",
+        "Selection Sort": "Time Complexity: O(n^2)",
+        "Quick Sort": "Time Complexity: O(n log n) average, O(n^2) worst",
+        "Merge Sort": "Time Complexity: O(n log n)",
+        "Count Sort": "Time Complexity: O(n + k)",
+    }
+    complexity_display_label.config(text=time_complexities.get(selected_algo, ""))
+
+algo_select.bind("<<ComboboxSelected>>", update_time_complexity)
+update_time_complexity(None)
 
 Label(controls_frame, text="No. of Elements (n):", font=1, bg="#f0f0f0").pack(anchor="w")
 entry_n = Entry(controls_frame)
