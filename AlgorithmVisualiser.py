@@ -54,7 +54,7 @@ def reset_app():
 
     entry_n.delete(0, END)
     entry_element.delete(0, END)
-    algo_select.current(0)
+    algo_select.current()
     speed.set(0.01)
     speed_slider.set(0.01)
     speed_slider.focus_set()
@@ -148,6 +148,7 @@ def start_sorting():
     
 def on_enter_after_input():
     play_click_sound()
+    
     if current_index >= total_elements and total_elements > 0:
         messagebox.showinfo("Info", "All elements have already been entered!")
 
@@ -197,8 +198,10 @@ def draw_data(data, optional_color='white', digit=None, digit2=None, end=None, v
         color = optional_color
         if digit is not None and i == digit:
             color = 'red'
+            
         if digit2 is not None and i == digit2:
             color = 'blue'
+            
         if end is not None and i > end:
             color = 'green'
 
