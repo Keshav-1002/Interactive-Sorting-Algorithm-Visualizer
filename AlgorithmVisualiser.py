@@ -65,6 +65,7 @@ def reset_app():
 
     canvas.delete("all")
     algo_display_label.config(text="")
+    complexity_display_label.config(text="")
 
     start_button.pack_forget()
     start_button.pack(before=next_button, pady=(10, 5), fill="x")
@@ -165,10 +166,10 @@ main_frame.pack(padx=20, pady=10, fill="both", expand=True)
 visualization_frame = Frame(main_frame, bg="white", bd=2, relief="solid", width=500, height=200)
 visualization_frame.pack(side="left", fill="both", expand=True, anchor="s")
 
-algo_display_label = Label(visualization_frame, text="", font=("Arial", 12), bg="white")
+algo_display_label = Label(visualization_frame, text="", font=("Arial", 14, "bold"), bg="white")
 algo_display_label.pack(pady=5)
 
-complexity_display_label = Label(visualization_frame, text="", font=("Arial", 10), bg="white")
+complexity_display_label = Label(visualization_frame, text="", font=("Arial", 13), bg="white")
 complexity_display_label.pack(pady=(0, 5))
 
 canvas_frame = Frame(visualization_frame, bg="white")
@@ -235,7 +236,7 @@ Label(controls_frame, text="Choose Algorithm:", bg="#f0f0f0", font=8).pack(ancho
 algo_select = ttk.Combobox(controls_frame, values=["Bubble Sort", "Selection Sort", "Quick Sort",
                             "Merge Sort", "Count Sort"], state="readonly")
 algo_select.pack(fill="x", pady=(5,25))
-algo_select.current(0)
+algo_select.current()
 
 def update_time_complexity(event):
     selected_algo = algo_select.get()
