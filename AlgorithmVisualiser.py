@@ -82,6 +82,12 @@ def add_element():
             play_error_sound()
             messagebox.showerror("Invalid Input", "Count Sort only supports non-negative integers.")
             return
+        
+        if not algo_select.get():
+            play_error_sound()
+            messagebox.showerror("Selection Error", "Please select a sorting algorithm first.")
+            algo_select.configure(state="readonly")
+            return
 
         play_click_sound()
         elements.append(val)
@@ -290,6 +296,6 @@ exit_button = Button(controls_frame, text="Exit", command=lambda: [play_click_so
                         font=8)
 exit_button.pack(pady=5, fill="x")
 
-entry_n.focus_set()
+algo_select.focus_set()
 
 root.mainloop()
