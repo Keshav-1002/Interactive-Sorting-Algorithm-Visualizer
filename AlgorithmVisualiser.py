@@ -54,7 +54,7 @@ def reset_app():
 
     entry_n.delete(0, END)
     entry_element.delete(0, END)
-    algo_select.current()
+    algo_select.set("")
     speed.set(0.01)
     speed_slider.set(0.01)
     speed_slider.focus_set()
@@ -239,10 +239,10 @@ Label(controls_frame, text="Choose Algorithm:", bg="#f0f0f0", font=8).pack(ancho
 algo_select = ttk.Combobox(controls_frame, values=["Bubble Sort", "Selection Sort", "Quick Sort",
                             "Merge Sort", "Count Sort"], state="readonly")
 algo_select.pack(fill="x", pady=(5,25))
-algo_select.current()
 
 def update_time_complexity(event):
     selected_algo = algo_select.get()
+    algo_display_label.config(text=f"Selected Algorithm: {selected_algo}")
     time_complexities = {
         "Bubble Sort": "Time Complexity: O(n^2)",
         "Selection Sort": "Time Complexity: O(n^2)",
