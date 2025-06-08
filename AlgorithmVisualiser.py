@@ -140,10 +140,6 @@ def start_sorting():
     sort_func = algorithm_functions.get(selected_algo)
     sort_button.configure(state="disabled")
     speed_slider.configure(state="disabled")
-    
-    if sort_func is None:
-        messagebox.showerror("Error", "No algorithm selected.")
-        return
 
     def sort_thread():
         sort_func(elements, draw_data, get_speed)
