@@ -48,8 +48,7 @@ def start_input():
         
     except ValueError:
         play_error_sound()
-        speak('''Input Error!
-                        Please enter a valid number of elements (positive integer greater then 3).''')
+        speak("Please enter a valid number of elements (positive integer greater then 3)")
         messagebox.showerror("Input Error", 
                         "Please enter a valid number of elements (positive integer greater then 3).")
 
@@ -83,7 +82,7 @@ def reset_app():
 
     start_button.pack_forget()
     start_button.pack(before=next_button, pady=(10, 5), fill="x")
-    entry_n.focus_set()
+    algo_select.focus_set()
 
 def add_element():
     global current_index
@@ -100,7 +99,7 @@ def add_element():
         
         if not algo_select.get():
             play_error_sound()
-            speak("Selection Error! Please select a sorting algorithm first.")
+            speak("Please select a sorting algorithm first.")
             messagebox.showerror("Selection Error", "Please select a sorting algorithm first.")
             algo_select.configure(state="readonly")
             return
