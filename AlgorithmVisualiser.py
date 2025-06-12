@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import threading
 import winsound
+import pyttsx3
 from bubble_sort import bubble_sort
 from quick_sort import quick_sort
 from selection_sort import selection_sort
@@ -38,6 +39,10 @@ def start_input():
         play_error_sound()
         messagebox.showerror("Input Error", 
                         "Please enter a valid number of elements (positive integer greater then 3).")
+        t1 = pyttsx3.init()
+        t1.say('''Input Error!
+                        Please enter a valid number of elements (positive integer greater then 3).''')
+        t1.runAndWait()
 
 def reset_app():
     play_click_sound()
@@ -81,11 +86,17 @@ def add_element():
         if algo_select.get() == "Count Sort" and val < 0:
             play_error_sound()
             messagebox.showerror("Invalid Input", "Count Sort only supports non-negative integers.")
+            t2 = pyttsx3.init()
+            t2.say("Invalid Input! Count Sort only supports non-negative integers.")
+            t2.runAndWait()
             return
         
         if not algo_select.get():
             play_error_sound()
             messagebox.showerror("Selection Error", "Please select a sorting algorithm first.")
+            t3 = pyttsx3.init()
+            t3.say("Selection Error! Please select a sorting algorithm first.")
+            t3.runAndWait()
             algo_select.configure(state="readonly")
             return
 
@@ -104,12 +115,19 @@ def add_element():
             prompt_label.configure(text="All elements entered!")
             sort_button.configure(state="normal")
             speed_slider.configure(state="normal")
-            messagebox.showinfo("Info", "All elements have been successfully entered!")
+            messagebox.showinfo("All elements have been successfully entered! \nplease select speed")
+            t4 = pyttsx3.init()
+            t4.say("All elements have been successfully entered! please select speed")
+            t4.runAndWait()
+            algo_select.configure(state="readonly")
             speed_slider.focus_set()
             
     except ValueError:
         play_error_sound()
         messagebox.showerror("Input Error", "Please enter a valid integer.")
+        t5 = pyttsx3.init()
+        t5.say("Input Error Please enter a valid integer.")
+        t5.runAndWait()
 
 def update_prompt():
     prompt_label.config(text=f"Enter element {current_index + 1} of {total_elements}:")
@@ -145,6 +163,9 @@ def start_sorting():
         sort_func(elements, draw_data, get_speed)
         draw_data(elements, optional_color='cyan')
         play_success_sound()
+        t7 = pyttsx3.init()
+        t7.say("Sorting Completed")
+        t7.runAndWait()
 
     threading.Thread(target=sort_thread).start()
     
@@ -152,7 +173,10 @@ def on_enter_after_input():
     play_click_sound()
     
     if current_index >= total_elements and total_elements > 0:
-        messagebox.showinfo("Info", "All elements have already been entered!")
+        messagebox.showinfo("Info", "All elements have already been entered! \nplease select speed")
+        t6 = pyttsx3.init()
+        t6.say("All elements have already been entered! please select speed")
+        t6.runAndWait()
 
 
 root = Tk()
