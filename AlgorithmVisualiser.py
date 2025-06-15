@@ -9,6 +9,7 @@ from quick_sort import quick_sort
 from selection_sort import selection_sort
 from merge_sort import merge_sort
 from count_sort import count_sort
+from insertion_sort import insertion_sort
 
 elements = []
 current_index = 0
@@ -120,7 +121,7 @@ def add_element():
             sort_button.configure(state="normal")
             speed_slider.configure(state="normal")
             speak("All elements have been successfully entered! please select speed")
-            messagebox.showinfo("All elements have been successfully entered! \nplease select speed")
+            messagebox.showinfo("info", "All elements have been successfully entered! \nplease select speed")
             algo_select.configure(state="readonly")
             speed_slider.focus_set()
             
@@ -149,7 +150,8 @@ algorithm_functions =   {
     "Quick Sort": quick_sort,
     "Selection Sort": selection_sort,
     "Merge Sort": merge_sort,
-    "Count Sort": count_sort
+    "Count Sort": count_sort,
+    "Insertion Sort": insertion_sort
                         }
 
 def start_sorting():
@@ -163,9 +165,12 @@ def start_sorting():
         sort_func(elements, draw_data, get_speed)
         draw_data(elements, optional_color='cyan')
         play_success_sound()
+        
         t = pyttsx3.init()
         t.say("Sorting Completed")
         t.runAndWait()
+        
+        root.after(100, lambda: algo_select.configure(state="disabled"))
 
     threading.Thread(target=sort_thread).start()
     
@@ -261,7 +266,7 @@ controls_frame.pack_propagate(False)
 
 Label(controls_frame, text="Choose Algorithm:", bg="#f0f0f0", font=8).pack(anchor="w")
 algo_select = ttk.Combobox(controls_frame, values=["Bubble Sort", "Selection Sort", "Quick Sort",
-                            "Merge Sort", "Count Sort"], state="readonly")
+                            "Merge Sort", "Count Sort", "Insertion Sort"], state="readonly")
 algo_select.pack(fill="x", pady=(5,25))
 
 def update_time_complexity(event):
@@ -273,6 +278,7 @@ def update_time_complexity(event):
         "Quick Sort": "Time Complexity: O(n log n) average, O(n^2) worst",
         "Merge Sort": "Time Complexity: O(n log n)",
         "Count Sort": "Time Complexity: O(n + k)",
+        "Insertion Sort": "Time Complexity: O(n) best, O(n^2) worst"
     }
     complexity_display_label.config(text=time_complexities.get(selected_algo, ""))
 
