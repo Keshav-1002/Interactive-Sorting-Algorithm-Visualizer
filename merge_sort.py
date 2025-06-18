@@ -11,7 +11,7 @@ def merge(arr, l, m, r, drawdata, get_speed):
     k = l
 
     while i < n1 and j < n2:
-        drawdata(arr, optional_color='yellow', digit=l + i, digit2=m + 1 + j)
+        drawdata(arr, digit=l + i, digit2=m + 1 + j, end=l-1)
         time.sleep(get_speed())
 
         if L[i] <= R[j]:
@@ -22,28 +22,26 @@ def merge(arr, l, m, r, drawdata, get_speed):
             arr[k] = R[j]
             j += 1
 
-        drawdata(arr, optional_color='red', digit=k)
+        drawdata(arr, digit=k, end=l-1)
         time.sleep(get_speed())
-
         k += 1
 
     while i < n1:
         arr[k] = L[i]
-
-        drawdata(arr, optional_color='green', digit=k)
+        drawdata(arr, digit=k, end=l-1)
         time.sleep(get_speed())
-
         i += 1
         k += 1
 
     while j < n2:
         arr[k] = R[j]
-
-        drawdata(arr, optional_color='green', digit=k)
+        drawdata(arr, digit=k, end=l-1)
         time.sleep(get_speed())
-
         j += 1
         k += 1
+
+    drawdata(arr, end=r)
+    time.sleep(get_speed())
 
 def merge_sort_recursive(arr, l, r, drawdata, get_speed):
     
@@ -52,8 +50,13 @@ def merge_sort_recursive(arr, l, r, drawdata, get_speed):
 
         merge_sort_recursive(arr, l, m, drawdata, get_speed)
         merge_sort_recursive(arr, m + 1, r, drawdata, get_speed)
+
         merge(arr, l, m, r, drawdata, get_speed)
 
 def merge_sort(arr, drawdata, get_speed):
+    drawdata(arr)
+    time.sleep(get_speed())
     merge_sort_recursive(arr, 0, len(arr) - 1, drawdata, get_speed)
-    drawdata(arr, optional_color='cyan')
+
+    drawdata(arr, end=len(arr)-1)
+    
