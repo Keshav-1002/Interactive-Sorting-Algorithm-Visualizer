@@ -7,7 +7,7 @@ def bubble_sort(data, draw_data, get_speed):
         swapped = False
         
         for j in range(n - 1 - i):
-            draw_data(data, optional_color='white', digit=j, digit2=j+1)
+            draw_data(data, optional_color='white', digit=j, digit2=j+1, end=n-1-i)
             time.sleep(get_speed())
             
             if data[j] > data[j + 1]:   
@@ -15,10 +15,11 @@ def bubble_sort(data, draw_data, get_speed):
                 swapped = True
                 continue
             
-            draw_data(data, optional_color='red', digit=j, digit2=j+1)
+            draw_data(data, optional_color='red', digit=j, digit2=j+1, end=n-1-i)
             time.sleep(get_speed())
             
         if not swapped:  
             break
-        
-    draw_data(data, optional_color = 'cyan')
+
+    draw_data(data, end=n-1)
+    
