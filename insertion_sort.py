@@ -1,26 +1,29 @@
 import time
 
-def insertion_sort(data, draw_data, get_speed):
-    n = len(data)
-    
-    for i in range(1, n):
-        key = data[i]
+def insertion_sort(arr, drawdata, get_speed):
+    drawdata(arr)
+    time.sleep(get_speed())
+
+    for i in range(1, len(arr)):
+        key = arr[i]
         j = i - 1
 
-        draw_data(data, end=i-1, optional_color='white', digit=i)
+        drawdata(arr, digit=i, end=i-1)
         time.sleep(get_speed())
 
-        while j >= 0 and data[j] > key:
-            data[j + 1] = data[j]
-            
-            draw_data(data, end=i-1, optional_color='red', digit=j, digit2=j+1)
+        while j >= 0 and arr[j] > key:
+            drawdata(arr, digit=j, digit2=j+1, end=i-1)
             time.sleep(get_speed())
-            
+
+            arr[j + 1] = arr[j]
             j -= 1
 
-        data[j + 1] = key
+            drawdata(arr, digit=j+1, end=i-1)
+            time.sleep(get_speed())
 
-        draw_data(data, end=i, optional_color='white', digit=j+1)
+        arr[j + 1] = key
+        drawdata(arr, digit=j+1, end=i)
         time.sleep(get_speed())
 
-    draw_data(data, optional_color='cyan')
+    drawdata(arr, end=len(arr)-1)
+    
