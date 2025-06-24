@@ -81,6 +81,7 @@ def reset_app():
     total_elements = 0
     is_sorting_complete = False
 
+    entry_element.delete(0, END)
     entry_n.configure(state="normal")
     algo_select.configure(state="readonly")
     entry_element.configure(state="disabled")
@@ -88,7 +89,6 @@ def reset_app():
     sort_button.configure(state="disabled")
 
     entry_n.delete(0, END)
-    entry_element.delete(0, END)
     algo_select.set("")
     speed.set(0.01)
     speed_slider.set(0.01)
@@ -292,7 +292,7 @@ controls_frame.pack_propagate(False)
 
 Label(controls_frame, text="Choose Algorithm:", bg="#e8f1f3", font=8).pack(anchor="w")
 algo_select = ttk.Combobox(controls_frame, values=["Bubble Sort", "Selection Sort", "Quick Sort",
-                            "Merge Sort", "Count Sort", "Radix Sort", "Insertion Sort"], state="readonly")
+                        "Merge Sort", "Count Sort", "Radix Sort", "Insertion Sort"], state="readonly")
 algo_select.pack(fill="x", pady=(5,25))
 
 def update_time_complexity(event):
@@ -348,5 +348,4 @@ exit_button = Button(controls_frame, text="Exit", command=lambda: [play_click_so
 exit_button.pack(pady=5, fill="x")
 
 algo_select.focus_set()
-
 root.mainloop()
