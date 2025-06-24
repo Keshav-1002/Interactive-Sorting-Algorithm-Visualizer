@@ -72,6 +72,7 @@ def start_input():
         speak("Please enter a valid number of elements (positive integer greater then 3)")
         messagebox.showerror("Input Error", 
                         "Please enter a valid number of elements (positive integer greater then 3).")
+        entry_n.delete(0, END)
 
 def reset_app():
     play_click_sound()
@@ -92,7 +93,6 @@ def reset_app():
     algo_select.set("")
     speed.set(0.01)
     speed_slider.set(0.01)
-    speed_slider.focus_set()
     prompt_label.config(text="Enter element:")
 
     for widget in canvas_frame.winfo_children():
@@ -117,6 +117,14 @@ def add_element():
             play_error_sound()
             speak("Invalid Input! Count Sort only supports non-negative integers.")
             messagebox.showerror("Invalid Input", "Count Sort only supports non-negative integers.")
+            entry_element.delete(0, END)
+            return
+
+        if algo_select.get() == "Radix Sort" and val < 0:
+            play_error_sound()
+            speak("Invalid Input! Radix Sort only supports non-negative integers.")
+            messagebox.showerror("Invalid Input", "Radix Sort only supports non-negative integers.")
+            entry_element.delete(0, END)
             return
         
         if not algo_select.get():
@@ -149,8 +157,9 @@ def add_element():
             
     except ValueError:
         play_error_sound()
-        messagebox.showerror("Input Error", "Please enter a valid integer.")
         speak("Input Error! Please enter a valid integer.")
+        messagebox.showerror("Input Error", "Please enter a valid integer.")
+        entry_element.delete(0, END)
 
 def update_prompt():
     prompt_label.config(text=f"Enter element {current_index + 1} of {total_elements}:")
@@ -238,7 +247,7 @@ def draw_data(data, optional_color='white', digit=None, digit2=None, end=None, v
     c_height = 500
     x_width = c_width / (len(data) + 1)
     offset = 20
-    spacing = 10
+    spacing = 9
     max_data = max(data) if data else 1
     normalized_data = [i / max_data for i in data]
     
@@ -284,7 +293,7 @@ def draw_data(data, optional_color='white', digit=None, digit2=None, end=None, v
 
     root.update_idletasks()
 
-speed = DoubleVar(value=0.03)
+speed = DoubleVar(value=0.01)
 
 controls_frame = Frame(main_frame, bg="#f0f0f0", width=200)
 controls_frame.pack(side="right", fill="y", padx=20)
